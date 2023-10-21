@@ -27,8 +27,12 @@ def main(request):
 
 
 def testing(request):
+    mydata = Member.objects.all().values()
+    # mydata = Member.objects.filter(Q(firstname='Emil') | Q(firstname='Tobias')).values()
+    # mydata = Member.objects.all().order_by('lastname', '-id').values()
+
     template = loader.get_template('template.html')
     context = {
-        'fruits': ['Apple', 'Banana', 'Cherry'],
+        'mymembers': mydata,
     }
     return HttpResponse(template.render(context, request))
